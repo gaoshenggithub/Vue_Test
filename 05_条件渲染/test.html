@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05_条件渲染</title>
+</head>
+<body>
+    <div id="app">
+        <p v-if="ok">使用v-if:表白成功</p>
+        <p v-else>使用v-if:表白失败</p>
+        <br/>
+        <p v-show="ok">使用v-show:表白成功</p>
+        <p v-show="!ok">使用v-show:表白失败</p>
+        <button @click="update()">{{ok?"显示":"隐藏"}}</button>
+    </div>
+    <script type="text/javascript" src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                ok:true,
+                a:"显示",
+                b:"隐藏"
+
+            },
+            methods:{
+                update:function(){
+                    return this.ok=!this.ok;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

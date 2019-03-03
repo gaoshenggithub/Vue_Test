@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+</head>
+<body>
+
+<!--
+    v-model模型语法
+    {{}}大括号语法 {{{}}}也是表示大括号语法
+-->
+<div id="app1">
+    <p>{{vModelName}}</p>
+
+    <!--
+        v-html:将会解析html标签
+        v-text:不会解析html文件
+    -->
+    <p v-html="url"></p>
+    <p v-text="url"></p>
+
+    <!--
+        强制绑定语法
+            v-bind:属性
+        简写:  :属性
+    -->
+    <img v-bind:src="imgUrl"/>
+    <img :src="imgUrl"/>
+    <!--
+        函数触发:
+        v-click:方式
+        @方式
+    -->
+
+    <button v-on:click="click()">按钮</button>
+    <button @click="test()">简写</button>
+</div>
+</body>
+<script src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el: "#app1",
+        data: {
+            vModelName: "String",
+            url: "<a href='http://www.baidu.com'>百度</a>",
+            imgUrl: "http://www.gulixueyuan.com/themes/june/img/logo-green1.png?version=8.3.2"
+        },
+        methods:{
+            click:function(){
+                alert("String");
+            },
+            test(){
+                alert("简写方式");
+            }
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04_class和style绑定</title>
+    <style type="text/css">
+        .isClass{
+            color:red;
+        }
+        .classA{
+            color:yellow;
+            font-size: 20px;
+        }
+        .classB{
+            color: blue;
+            font-size: 40px;
+        }
+        .classC{
+            color:aqua;
+        }
+        .classD{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p :class="isClass">使用:class是字符串的形式来表示</p>
+        <p :class="{classA:firstClass,classB:secondClass}">使用:class是对象的方式</p>
+        <p :class="['classC','classD']">使用:class是数组的方式</p>
+        <button @click="update()">更新</button>
+        <hr/>
+        <p :style="{color:isColor,fontSize}">使用:style属性</p>
+    </div>
+<script type="text/javascript" src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el:"#app",
+        data:{
+            isClass:"isClass",
+            firstClass:true,
+            secondName:false,
+            isColor:"red",
+            fontSize:"20px",
+        },
+        methods:{
+            update(){
+                this.firstClass=!this.firstClass;
+                this.secondClass=!this.secondClass;
+            }
+        }
+    });
+</script>
+</body>
+</html>

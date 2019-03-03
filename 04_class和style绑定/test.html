@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04_class和style绑定</title>
+    <style type="text/css">
+        .classA{
+            color:red;
+        }
+        .classB{
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <p :class="myClass">强制绑定class属性</p>
+        <p :class="{classA:isClass,classB:!isClass}">.......</p>
+        <br/>
+        <button @click="update()">换肤</button>
+    </div>
+<script type="text/javascript" src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el:"#app",
+        data:{
+            myClass:"classA",
+            isClass:true
+        },
+        methods:{
+            update:function () {
+                this.isClass=!this.isClass;
+            }
+        }
+    });
+</script>
+</body>
+</html>

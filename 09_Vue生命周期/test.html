@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>09_Vue生命周期</title>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="destoryVue">Destory</button>
+        <p v-show="isShow">测试数据</p>
+    </div>
+    <script type="text/javascript" src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                isShow:true,
+            },
+
+            //初始化数据之前
+            beforeCreate(){
+                console.log("beforeCreate....");
+            },
+
+            //初始化数据
+            created(){
+
+              console.log("created.....");
+            },
+
+            //更新数据之前
+            beforeUpdate(){
+              console.log("beforeUpdate.....");
+            },
+            //更新数据
+            updated(){
+                console.log("updated.....");
+            },
+
+            //挂载数据
+            mounted(){
+                this.interVal = window.setInterval(()=>{
+                    this.isShow=!this.isShow;
+                    console.log("mounted....数据")
+                },1000);
+            },
+
+            //在销毁生命周期之前将定时器任务数据清掉
+            beforeDestroy(){
+                console.log("清掉定时任务");
+                window.clearInterval(this.interVal);
+            },
+
+
+            //销毁生命周期
+            methods:{
+                destoryVue(){
+
+                    vue.$destroy();
+                    //开始回调beforeDestroy()结束生命周期之后的要执行的操作
+                    console.log("生命周期开始结束");
+                }
+            },
+
+            destroyed(){
+                console.log("生命周期已经结束掉");
+            },
+
+        });
+    </script>
+</body>
+</html>

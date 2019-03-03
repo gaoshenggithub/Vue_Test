@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义属性</title>
+</head>
+<body>
+    <div id="app">
+        <p v-upper-text="msg"></p>
+        <p v-lower-text="name"></p>
+    </div>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript">
+        Vue.directive('upper-text',(el,binding)=>{
+            console.log(el,binding);
+            el.innerHTML=binding.value.toUpperCase();
+        });
+        new Vue({
+            el:"#app",
+            data:{msg:"i love you",name:"STRING"},
+            directives:{
+                "lower-text"(el,binding){
+                    el.innerHTML=binding.value.charAt(0).toUpperCase()+binding.value.slice(1).toLowerCase();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

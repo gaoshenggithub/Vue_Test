@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="demo">
+        <p>{{username}}</p>
+        <input type="text" v-model="username"/>
+    </div>
+</body>
+
+<!--
+    el:表示用户的的id
+    data:用来初始化数据
+-->
+
+<script src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el:"#demo",
+        data:{
+            username:"String"
+        }
+    });
+</script>
+</html>

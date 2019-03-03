@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06_列表渲染</title>
+</head>
+<body>
+    <div id="app">
+        搜索:<input type="text" v-model="searchName"/><br/>
+        <ul>
+            <li v-for="(item, index) in peopleData" :key="index">
+                {{index+1}}-----{{item.name}}-----{{item.age}}---
+                <button @click="delete1(index)">删除</button>
+                ---<button @click="update1(index)">更新</button>
+            </li>
+            姓名:<input placeholder="name" type="text" v-model="name"/><br/>
+            年龄:<input placeholder="age" type="text" v-model="age"/><br/>
+            <button @click="add1()">添加</button>
+        </ul>
+        <button @click="setOrderType(1)">升序</button>
+        <button @click="setOrderType(2)">降序</button>
+    </div>
+    <script type="text/javascript" src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+    <script type="text/javascript">
+        var vue= new Vue({
+            el:"#app",
+            data:{
+                searchName:'',
+                people:[
+                    {name:"高胜",age:"34"},
+                    {name:"眼",age:"100"},
+                    {name:"一眼万年",age:"90"},
+                    {name:"突破",age:"67"},
+                ],
+                name:"",
+                age:"",
+                orderType:0,
+            },
+            computed:{
+                peopleData:function(){
+                    const {people,searchName,orderType} = this;
+                    //筛选数据
+                    let peopleArr = people.filter((value)=>{
+                        return value.name.indexOf(searchName)!==-1;
+                    });
+                    //排序数据
+                    if (orderType!==0){
+                        peopleArr.sort((value1,value2)=>{
+                            let a= orderType===2?value2.age-value1.age:value1.age-value2.age
+                            console.log(a+"aaaaaaaaaaaaaaaaa");
+                                return orderType===2?
+                                    value2.age-value1.age:value1.age-value2.age
+                        });
+                    }
+
+                    return peopleArr;
+                }
+            },
+            methods:{
+                delete1(value){
+                    this.people.splice(value,1);
+                },
+                update1(value){
+                    var name = this.name;
+                    var age = this.age;
+                    console.log(name);
+                    console.log(age);
+                    if (name==null || ""==name.trim()){
+                        alert("名字不能为空");
+                        return;
+                    }
+                    if (age>150 || age<20){
+                        alert("年龄范围在20~150之间");
+                        return;
+                    }
+                    var a = {"name":name,"age":age};
+                    this.people.splice(value,1, a);
+                },
+                add1(){
+                    var name = this.name;
+                    var p = this.people;
+                    var age = this.age;
+                    var b = {"name":name,"age":age};
+                    for (var i=0;i<p.length;i++){
+                        if (name==p[i].name){
+                            alert("不可添加重复元素");
+                            return;
+                        }
+                    }
+                    this.people.push(b);
+                },
+                setOrderType(orderType){
+                    this.orderType=orderType;
+                    console.log(orderType);
+                }
+            },
+        });
+    </script>
+</body>
+</html>

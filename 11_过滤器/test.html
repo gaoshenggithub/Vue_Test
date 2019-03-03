@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div id="app">
+        <input type="text" placeholder="输入..." v-model="name"/>
+        <p>{{name | test}}</p>
+    </div>
+</head>
+<body>
+    <script src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                name:""
+            },
+            filters:{
+                test:function (value) {
+                    console.log(this);
+                    console.log(!value);
+                    if (value==''){
+                        return "";
+                    }
+                    value = value.toString();
+                    return value.charAt(0).toUpperCase()+value.slice(1);
+                }
+            },
+        });
+    </script>
+</body>
+</html>

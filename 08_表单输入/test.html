@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08_表单输入</title>
+    <style type="text/css">
+        .user{
+            height:40px;
+            width:400px;
+            border-bottom-color: aliceblue;
+            font-size: 20px;
+
+        }
+        input::-webkit-input-placeholder {
+            /* placeholder颜色  */
+            color: #aab2bd;
+            /* placeholder字体大小  */
+            font-size: 1.6em;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form action="#" method="post" @submit="submitData"></form>
+        <input type="text" placeholder="姓名" class="user" v-model="username"/><br/>
+        <input type="password" placeholder="密码" class="user" v-model="password"/><br/>
+        女:<input type="radio" value="女" id="female" v-model="gender"/>
+        男:<input type="radio" value="男" id="male" v-model="gender"/>
+
+        <select v-model="cityId">
+            <option :value="item.id" v-for="(item,index) in arrData" :key="item.id">{{item.name}}</option>
+        </select>
+    </div>
+
+    <script type="text/javascript" src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                username:"",
+                gender:"女",
+                password:"",
+                cityId:2,
+                arrData:[{"id":1,"name":"美国"},{"id":2,"name":"中国"},{"id":3,"name":"西班牙"},{"id":4,"name":"加拿大"}]
+            },
+            methods:{
+                submitData(){
+                    console.log(this.cityId)
+                }
+            }
+        });
+    </script>
+</body>
+</html>

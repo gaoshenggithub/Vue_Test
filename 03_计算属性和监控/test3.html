@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03_计算属性和监控</title>
+</head>
+<body>
+    <div id="app">
+        第一个字符:<input type = "text" v-model="firstName"/><br/>
+        第二个字符:<input type = "text" v-model="lastName"/><br/>
+        <hr/>
+        单向:<input type="text" v-model="fullName1"/><br/>
+        单向:<input type="text" v-model="fullName2"/><br/>
+        双向:<input type="text" v-model="fullName3"/><br/>
+    </div>
+<script type="text/javascript" src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el:"#app",
+        data:{
+            firstName:"1",
+            lastName:"2",
+            fullName2:"1-2"
+        },
+        //使用计算属性
+        computed:{
+          fullName1:function(){
+              return this.firstName+"-"+this.lastName;
+          },
+
+          //使用get/set
+          fullName3:{
+              get(){
+                  return this.firstName+"-"+this.lastName;
+              },
+              set(value){
+                  var s = value.split("-");
+                  this.firstName = s[0];
+                  this.lastName = s[1];
+              }
+          },
+        },
+        //监控属性
+       /* watch:{
+            firstName:function(value){
+                this.fullName2=value+"-"+this.lastName;
+            },
+            lastName:function(value){
+                this.fullName2=this.firstName+"-"+value;
+            }
+        }*/
+    });
+    vue.$watch("firstName",function(value){
+        this.fullName2=value+"-"+this.lastName;
+    });
+    vue.$watch("lastName",function(value){
+        this.fullName2=this.firstName+"-"+value;
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="demo">
+    <input type="text" v-model = "searchName">
+    <ul>
+        <li v-for="(a,index) in filterPersons">
+            {{index}}----{{a.name}}-----{{a.age}}
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el:"#demo",
+        data:{
+            searchName: '',
+            arrData:[
+                {name:"TOM",age:34},
+                {name:"LONG",age:35},
+                {name:"JE",age:22},
+                {name:"Andy",age:12}
+            ]
+        },
+        computed:{
+            filterPersons: function(){
+                const {arrData,searchName} = this;
+                let filterData;
+                filterData = arrData.filter(function(p){
+                    return p.name.indexOf(searchName)!==-1;
+                });
+                return filterData;
+            }
+        },
+    });
+</script>
+</body>
+</html>

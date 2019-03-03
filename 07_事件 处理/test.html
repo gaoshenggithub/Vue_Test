@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07_事件处理</title>
+
+    <!--
+        01_绑定监听事件:
+        @XXXX:
+            默认形参$event
+
+        02_事件修饰符
+            event.prevent===>event.preventDefault()阻止默认的事件发生
+            event.stop===>event.stopPropagation()阻止冒泡事件产生
+
+    -->
+    <style type="text/css">
+        .classA{
+            background-color:red;
+            height: 300px;
+            width: 300px;
+        }
+        .classB{
+            background-color: #ff6c2e;;
+            height:200px;
+            width:200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>01绑定监听事件</h2>
+        <button @click="test1()">test1</button>
+        <button @click="test2('触发第二个按钮')">test2</button>
+        <button @click='test3($event)'>test3</button>
+        <button @click='test4'>test4</button>
+        <button @click='test5("触发第五个按钮",$event)'>test5</button>
+        <hr/>
+        <h2>02事件修饰符</h2>
+        <a href="http://www.baidu.com" @click.prevent>百度一下</a>
+        <div :class="isClassA" @mouseover="test6">
+            <div :class="isClassB" @mouseover="test7($event)"></div>
+        </div>
+
+        <h3>03按钮修饰符</h3>
+        <div>
+            <input type="text" @keyup="test8"/>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/http_cdn.jsdelivr.net_npm_vue_dist_vue.js"></script>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                isClassA:"classA",
+                isClassB:"classB",
+            },
+
+            //函数执行
+            methods:{
+                test1(){
+                    alert("触发第一个按钮");
+                },
+                test2(value){
+                    alert(value);
+                },
+                test3(event){
+                    console.log(event);
+                    alert(event.target.innerHTML);
+                },
+                test4(event){
+                    alert(event.target.innerText);
+                },
+                test5(value,event){
+                    alert(value+"-----------"+event.target.innerHTML);
+                },
+                test6(){
+                    alert("outter");
+                },
+                test7(event){
+                    event.stop;
+                    alert("inner");
+                },
+                test8(event){
+                    console.log(event.ctrlKey);
+                    console.log(event.keyCode);
+                    if (event.ctrlKey && event.keyCode===13){
+                        alert("保存");
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
